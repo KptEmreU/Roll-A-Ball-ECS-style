@@ -3,6 +3,8 @@ Recreation of Unity Roll-A-Ball tutorial
 
 Completed by Unity 2018.1.0b12 build from welcome thread. https://beta.unity3d.com/download/ed1bf90b40e6/public_download.html
 
+![Alt Text](https://thumbs.gfycat.com/FlashyContentFoxhound-size_restricted.gif)
+
 This is a pure-ECS example as much as it could be. I have used Canvas and Camera Transform and I have created table from cubes so they are actually game objects. There is only 1 job component system and 4 regular component systems. Honestly Eraseballsystem can be turned into job too as it might make lots of stuff when you spawn 4000 cubes. And yes you can :) Though even at 36000 cubes it is 80 frames in my computer. So your call.
 
 Other than that balls and cubes are all entities, they don't use any physics or colliders. It means actually you can fly away from the table but you can easily limit it with a new system stoping the inputs when a particular X or Z value is happened on the player ball.
