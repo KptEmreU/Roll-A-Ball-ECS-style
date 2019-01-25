@@ -17,7 +17,7 @@ Other than that balls and cubes are all entities, they don't use any physics or 
 Let's start
 
 First you need tons of new Libraries as using statements;
-```
+```csharp
 using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
@@ -33,18 +33,18 @@ Copy paste them above your scripts until you understand which ones are actually 
 Every game has a start and in our example it is "BootTime" script
 
 Again as we are writing our code in ECS style we won't use any Monobehaviour, there will be no script attaching. So our class actually don't need to be a Monobehaviour. Here is the first difference
-```
+```csharp
 public class BootTime
 {....}
 ```
 
 But we need something to work right? I mean how we can start this game? Here we have a new attribute where you should write on top of the function you want to work. (Attribute will make this function called after the scene loaded, because we need some gameobjects as templates for our entities. See cubeLook, and playerLook in hierarchy. They will deleted when game starts as those gameobjects are just for samples and will not be in our game.
-```
+```csharp
 [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     public static void Init() {....}
 ```
 Ok somehow we make it work while not using a gameObject. But we will need a entity manager so we can spawn some entities right?
-```
+```csharp
 var entityManager = World.Active.GetOrCreateManager<EntityManager>();
         // This is how we will create our player, ECS works best when you create Archetypes. It is kinda prefab but not ofc 
         var firstEntityArchetype = entityManager.CreateArchetype(typeof(Cube), typeof(TransformMatrix), typeof(Position), typeof(Rotation), typeof(FirstSteps), typeof (Player), typeof(PlayerInput));
@@ -78,7 +78,7 @@ So we have entities... And they are rendered. But they are all together waiting 
 
 I will not explain each system in detail but we should surgically analyse this one for learning purposes.
 
-```
+```csharp
 using Unity.Entities;
 using Unity.Transforms;
 using Unity.Mathematics;
@@ -115,7 +115,7 @@ public struct BallsGroup {....}
 protected override void OnUpdate(){ ....}
 ```
 Ok we get the system layout but let's focus into struct right
-```
+```csharp
   public struct BallsGroup
     {
         // This is kinda magical, public int Length, don't ask me why but it increments with every new entity enters
@@ -137,12 +137,12 @@ Ok we get the system layout but let's focus into struct right
 Sooo, we just checked inside of our first system. Next?
 
 Let's make the PlayerMove, so we need a 
-```
+```csharp
 public class PlayerMoveSystem
 ```
 
 That's not something very new but just look into OnUpdate function so we learn how to move a ball around
-```
+```csharp
 protected override void OnUpdate()
     {
         float dt = Time.deltaTime;
@@ -171,12 +171,12 @@ protected override void OnUpdate()
 ```
 
 Let's rotate cubes but Call this
-```
+```csharp
 class RotateBallsSystem : JobComponentSystem
 ```
 I mean why not? This is a Job Though and not our usual Component System. It is a JobComponentSystem
 
-```
+```csharp
 class RotateBallsSystem : JobComponentSystem
 {
 
@@ -222,7 +222,7 @@ class RotateBallsSystem : JobComponentSystem
 
 And we made our first job too. Let's see how we can destroy entities when our ball approachs them.
 
-```
+```csharp
 public class EraseBallsSystem : ComponentSystem
 {
     // Remember this is called from our BootTime Script, not very ECS but it works ;) Honestly I don't know anyother way
