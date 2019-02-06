@@ -1,6 +1,8 @@
 # Roll-A-Ball-ECS-style
 Recreation of Unity Roll-A-Ball tutorial 
 
+***This is now outdated***
+
 Completed by Unity 2018.1.0b12 build from welcome thread. https://beta.unity3d.com/download/ed1bf90b40e6/public_download.html
 
 A must read from Unity Forums: Read all sticky threads (Especially welcome one, you may not to setup your project settings): 
